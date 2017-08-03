@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context="android.leo.electricity.activity.RegisterActivity">
+
+
+    <EditText
+        android:id="@+id/registerNumber"
+        android:layout_width="274dp"
+        android:layout_height="54dp"
+        android:ems="10"
+        android:hint="phoneNumber"
+        android:inputType="phone"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="119dp" />
+
+    <EditText
+        android:id="@+id/registerPwd"
+        android:layout_width="274dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:hint="password"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="279dp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/valCode"
+            android:layout_width="172dp"
+            android:layout_height="46dp"
+            android:ems="10"
+            android:inputType="number"
+            tools:layout_editor_absoluteY="203dp"
+            tools:layout_editor_absoluteX="48dp" />
+
+        <Button
+            android:id="@+id/getSms"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="短信验证"
+            tools:layout_editor_absoluteX="234dp"
+            tools:layout_editor_absoluteY="203dp" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/register"
+        android:layout_width="277dp"
+        android:layout_height="53dp"
+        android:text="注册"
+        tools:layout_editor_absoluteX="48dp"
+        tools:layout_editor_absoluteY="346dp" />
+</LinearLayout>
