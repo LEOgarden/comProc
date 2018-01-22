@@ -1,11 +1,24 @@
 package android.leo.electricity.fragment;
 
 
+import android.app.Activity;
 import android.app.Fragment;
+import android.content.Context;
 import android.content.Intent;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.R;
+import android.leo.electricity.activity.LoginActivity;
+import android.leo.electricity.activity.home.ArrearageActivity;
+import android.leo.electricity.activity.home.ArrearageUserListActivity;
+import android.leo.electricity.activity.home.BillRecordActivity;
+import android.leo.electricity.activity.home.BindActivity;
+import android.leo.electricity.activity.home.CheckActivity;
 import android.leo.electricity.activity.home.ElectricUsedActivity;
+import android.leo.electricity.activity.home.NoticeActivity;
+import android.leo.electricity.activity.home.PowerUserListActivity;
+import android.leo.electricity.activity.home.RecordUserListActivity;
+import android.leo.electricity.activity.service.DepartmentListActivity;
+import android.leo.electricity.activity.usepower.ApplyActivity;
 import android.leo.electricity.adapter.AdViewPagerAdapter;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -14,7 +27,11 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,22 +55,31 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private int nextPosition = 1;
     private final int FAKE_BANNER_SIZE = 100;
     private Timer mtimer;
-    private Button electricityAndCharge;
+    private Button electricityAndCharge;//电费电量按钮
+    private Button bill;//电费记录按钮
+    private Button notice;//停电公告按钮
+    private Button check;//用户查询按钮
+    private Button serverPoint;//服务网点
+    private Button operation;//业务办理
+    private Button arrearage;//欠费记录
+    private RelativeLayout bind_num_r;//绑定用户
 
-    TimerTask mTimerTask = new TimerTask() {
+    TimerTask mTimerTask = new TimerTask(){
         @Override
-        public void run() {
-            if (!mIsUserTouched) {
+        public void run(){
+            if(!mIsUserTouched){
                 currentPosition = nextPosition;
-                nextPosition = (nextPosition+1)%imageIds.length;
-                //更新ui
-                getActivity().runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adViewPager.setCurrentItem(currentPosition, false);
-                        setImageViewList(currentPosition);
-                    }
-                });
+                nextPosition = (nextPosition + 1) % imageIds.length;
+                if (getActivity() == null)
+                    return;
+                    //更新ui
+                    getActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adViewPager.setCurrentItem(currentPosition, false);
+                            setImageViewList(currentPosition);
+                        }
+                    });
             }
         }
     };
@@ -67,17 +93,16 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
 
     private boolean mIsUserTouched = false;
 
-    public HomeFragment() {
+    public HomeFragment(){
         images = new ArrayList<>();
         dots = new ArrayList<>();
         adapter = new AdViewPagerAdapter(images);
         mtimer = new Timer();
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             Bundle savedInstanceState){
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         adViewPager = (ViewPager) view.findViewById(R.id.ad_viewpager);
         //将图片添加到imageview中
@@ -87,18 +112,31 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         dots.add(view.findViewById(R.id.dot1));
         dots.add(view.findViewById(R.id.dot2));
         dots.add(view.findViewById(R.id.dot3));
-
         adViewPager.setAdapter(adapter);
         adViewPager.setOnTouchListener(this);
         //轮播更新
         mtimer.schedule(mTimerTask, 3000, 3000);
         electricityAndCharge = (Button) view.findViewById(R.id.electricityAndCharge);
         electricityAndCharge.setOnClickListener(this);
+        bill = (Button) view.findViewById(R.id.bill);
+        bill.setOnClickListener(this);
+        notice = (Button) view.findViewById(R.id.notice);
+        notice.setOnClickListener(this);
+        check = (Button) view.findViewById(R.id.check);
+        check.setOnClickListener(this);
+        serverPoint = (Button) view.findViewById(R.id.severPoint);
+        serverPoint.setOnClickListener(this);
+        operation = (Button) view.findViewById(R.id.operation);
+        operation.setOnClickListener(this);
+        arrearage = (Button) view.findViewById(R.id.arrearage);
+        arrearage.setOnClickListener(this);
+        bind_num_r = (RelativeLayout) view.findViewById(R.id.bind_num_r);
+        bind_num_r.setOnClickListener(this);
         return view;
     }
 
-    private void imageViewAddBac() {
-        for (int i=0; i<imageIds.length; i++){
+    private void imageViewAddBac(){
+        for(int i = 0; i < imageIds.length; i++){
             ImageView imagView = new ImageView(MyApplication.getInstance());
             imagView.setBackgroundResource(imageIds[i]);
             images.add(imagView);
@@ -106,48 +144,112 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     }
 
     @Override
-    public void onPageScrolled(int i, float v, int i1) {
+    public void onPageScrolled(int i, float v, int i1){
 
     }
 
     @Override
-    public void onPageSelected(int position) {
+    public void onPageSelected(int position){
         currentPosition = position % imageIds.length;
         mtimer.schedule(mTimerTask, 3000, 3000);
     }
 
-    private void setImageViewList(int position) {
+    private void setImageViewList(int position){
         position %= imageIds.length;
         //遍历dots重置src为normal
-        for (View dot : dots){
+        for(View dot : dots){
             dot.setBackgroundResource(R.drawable.dot);
         }
         dots.get(position).setBackgroundResource(R.drawable.dot_color);
     }
 
     @Override
-    public void onPageScrollStateChanged(int i) {
+    public void onPageScrollStateChanged(int i){
 
     }
 
     @Override
-    public boolean onTouch(View v, MotionEvent event) {
+    public boolean onTouch(View v, MotionEvent event){
         int action = event.getAction();
-        if (action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE){
+        if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_MOVE){
             mIsUserTouched = true;
-        }else if (action == MotionEvent.ACTION_UP){
+        }else if(action == MotionEvent.ACTION_UP){
             mIsUserTouched = false;
         }
         return false;
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v){
         Intent intent;
-        switch (v.getId()) {
+        switch(v.getId()){
             case R.id.electricityAndCharge:
-                intent = new Intent(getActivity(), ElectricUsedActivity.class);
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), PowerUserListActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.bill:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), RecordUserListActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.notice:
+                intent = new Intent(getActivity(), NoticeActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.check:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), CheckActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.severPoint:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), DepartmentListActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.operation:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), ApplyActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.arrearage:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), ArrearageUserListActivity.class);
+                    startActivity(intent);
+                }
+                break;
+            case R.id.bind_num_r:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), BindActivity.class);
+                    startActivity(intent);
+                }
+
                 break;
         }
     }

@@ -5,35 +5,35 @@ package android.leo.electricity.bean;
  * Created by Administrator on 2017/7/19.
  */
 
-public class LoginInfo {
+public class LoginInfo{
     private String token;
     private String result;
     private String msg;
 
-    public LoginInfo() {
+    public LoginInfo(){
     }
 
-    public String getToken() {
+    public String getToken(){
         return token;
     }
 
-    public void setToken(String token) {
+    public void setToken(String token){
         this.token = token;
     }
 
-    public String getResult() {
+    public String getResult(){
         return result;
     }
 
-    public void setResult(String result) {
+    public void setResult(String result){
         this.result = result;
     }
 
-    public String getMsg() {
+    public String getMsg(){
         return msg;
     }
 
-    public void setMsg(String msg) {
+    public void setMsg(String msg){
         this.msg = msg;
     }
 }

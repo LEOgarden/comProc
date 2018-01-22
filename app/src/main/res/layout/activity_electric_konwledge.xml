@@ -8,19 +8,27 @@
     
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="60dp">
-        <ImageView
+        android:layout_height="58dp"
+        android:background="@color/colorPrimary">
+        <LinearLayout
             android:id="@+id/back_kw"
+            android:layout_width="58dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="16dp"
+            android:gravity="center">
+        <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/back2"/>
+            android:src="@drawable/back3"/>
+        </LinearLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:text="用电知识"/>
+            android:text="用电知识"
+            android:textSize="18dp"
+            android:textColor="@color/white"/>
     </RelativeLayout>
 
     <ScrollView
@@ -37,9 +45,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stateListAnimator="@drawable/lift_on_touch"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="4dp"
@@ -53,12 +61,13 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:background="@drawable/image1"/>
+                        android:background="@drawable/sense"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:text="用电常识"
                         android:textStyle="bold"
+                        android:textColor="@color/color_green_light"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -69,9 +78,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stateListAnimator="@drawable/lift_on_touch"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="4dp"
@@ -85,12 +94,13 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:background="@drawable/image2"/>
+                        android:background="@drawable/law"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:text="电力法律法规"
                         android:textStyle="bold"
+                        android:textColor="@color/color_red"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -101,9 +111,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stateListAnimator="@drawable/lift_on_touch"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="4dp"
@@ -117,12 +127,13 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:background="@drawable/image3"/>
+                        android:background="@drawable/service"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:text="服务指南"
                         android:textStyle="bold"
+                        android:textColor="@color/color_blue"
                         android:gravity="center"/>
                 </LinearLayout>
 
@@ -133,9 +144,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stateListAnimator="@drawable/lift_on_touch"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="4dp"
@@ -154,40 +165,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:text="资费标准"
+                        android:textColor="@color/color_yellow"
                         android:textStyle="bold"
                         android:gravity="center" />
-                </LinearLayout>
-
-            </android.support.v7.widget.CardView>
-            <android.support.v7.widget.CardView
-                android:id="@+id/server_promise"
-                tools:targetApi="lollipop"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:stateListAnimator="@drawable/lift_on_touch"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
-                android:clickable="true"
-                android:foreground="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="4dp"
-                app:cardUseCompatPadding="true"
-                app:cardPreventCornerOverlap="false">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="160dp"
-                        android:background="@drawable/image1"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:text="服务承诺"
-                        android:textStyle="bold"
-                        android:gravity="center"/>
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
@@ -197,9 +177,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:stateListAnimator="@drawable/lift_on_touch"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="16dp"
                 android:clickable="true"
                 android:foreground="?android:attr/selectableItemBackground"
                 app:cardCornerRadius="4dp"
@@ -213,12 +193,13 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="160dp"
-                        android:background="@drawable/image2"/>
+                        android:background="@drawable/common_question"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:text="常见问题"
                         android:textStyle="bold"
+                        android:textColor="@color/color_orange"
                         android:gravity="center"/>
                 </LinearLayout>
 

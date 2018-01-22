@@ -5,6 +5,6 @@ package android.leo.electricity.presenter;
  * Created by Administrator on 2017/7/24.
  */
 
-public interface IServerPresenter {
+public interface IServerPresenter{
     void obtainServerPoint(String url, String token);
 }

@@ -38,9 +38,9 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="掌上电力"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/icon"
+        android:label="耒阳电力掌营业厅"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -51,21 +51,62 @@
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
 
-        <activity android:name=".activity.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-        <activity android:name=".activity.LoginActivity" />
+        <activity
+            android:name=".activity.MainActivity"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.user.SetupActivity" />
         <activity android:name=".activity.service.DepartmentListActivity" />
         <activity android:name=".activity.service.ServerPointActivity" />
         <activity android:name=".activity.service.ElectricKnowledgeActivity" />
         <activity android:name=".activity.ShowTextActivity" />
-        <activity android:name=".activity.home.ElectricUsedActivity"></activity>
+        <activity android:name=".activity.home.ElectricUsedActivity" />
+        <activity android:name=".activity.home.BillRecordActivity" />
+        <activity android:name=".activity.home.NoticeActivity" />
+        <activity
+            android:name=".activity.usepower.PayActivity"
+            android:windowSoftInputMode="stateHidden|stateAlwaysHidden" />
+        <activity android:name=".activity.home.AnnualDetailActivity" />
+        <activity android:name=".activity.usepower.RechargeActivity" />
+        <activity android:name=".activity.usepower.ApplyActivity" />
+        <activity android:name=".activity.home.CheckActivity" />
+        <activity android:name=".activity.home.ArrearageActivity" />
+        <activity android:name=".activity.home.ArrearageUserListActivity" />
+        <activity android:name=".activity.home.BindActivity" />
+        <activity android:name=".activity.user.UnbindActivity" />
+        <activity android:name=".activity.home.CustomerInfoActivity" />
+        <activity android:name=".activity.home.PowerUserListActivity" />
+        <activity android:name=".activity.home.RecordUserListActivity" />
+        <activity
+            android:name=".activity.user.ModifyActivity"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".activity.user.ConsultActivity"
+            android:windowSoftInputMode="stateHidden|adjustPan" />
+        <activity
+            android:name=".activity.user.SuggestActivity"
+            android:launchMode="singleTask"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".activity.user.TypeActivity" />
+        <activity android:name=".activity.user.SuggestBehaviorActivity" />
+        <activity android:name=".activity.WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".activity.user.ChangePwdValCodeActivity" />
+        <activity android:name=".activity.user.AboutSystemActivity" />
+        <activity android:name=".wxapi.WXPayEntryActivity" />
+        <activity android:name=".wxapi.WXEntryActivity"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:launchMode="singleTop">
+        </activity>
     </application>
 
 </manifest>

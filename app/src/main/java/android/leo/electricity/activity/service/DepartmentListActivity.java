@@ -1,6 +1,8 @@
 package android.leo.electricity.activity.service;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.graphics.Path;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.adapter.DepartmentListAdapter;
 import android.leo.electricity.adapter.ServerPointAdapter;
@@ -10,6 +12,8 @@ import android.leo.electricity.presenter.IDepartmentPresenter;
 import android.leo.electricity.presenter.IServerPresenter;
 import android.leo.electricity.presenter.presenterImpl.DepartmentPresenterImpl;
 import android.leo.electricity.presenter.presenterImpl.ServerPresenterImpl;
+import android.leo.electricity.utils.ConCla;
+import android.leo.electricity.utils.Properties;
 import android.leo.electricity.view.IDepartmentView;
 import android.leo.electricity.view.IServerView;
 import android.leo.electricity.view.SpinnerWindow;
@@ -35,7 +39,7 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
     private ListView serverPointListView;
     private IDepartmentPresenter departmentPresenter;
     private IServerPresenter serverPresenter;
-    private ImageView backImage;
+    private LinearLayout backImage;
     private DepartmentListAdapter departmentListAdapter;
     private List<Department> departmentList;//部门选择列表
     private SpinnerWindow spinnerWindow;//部门选择弹窗
@@ -44,13 +48,13 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
     private ImageButton imageButton;
     private TextView departmentTextView;
     private LinearLayout departmentLinear;
-    private String url = "http://192.168.0.63:8080/ws/Power/powerService/getDepartMent";
-    private String url2 = "http://192.168.0.63:8080/ws/Power/powerService/getPowerArea";
+    /*private String url = "http://192.168.0.63:8080/ws/Power/powerService/getDepartMent?token=";
+    private String url2 = "http://192.168.0.63:8080/ws/Power/powerService/getPowerArea";*/
 
     Handler handler = new Handler(){
         @Override
         public void handleMessage(Message msg) {
-            switch (msg.what){
+            switch(msg.what){
                 case 1:
                     departmentList = (List<Department>) msg.obj;
                     setDepartmentAdapter(departmentList);
@@ -67,7 +71,7 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
      * 网点配适
      * @param serverPoints
      */
-    private void setServerPointAdapter(List<ServicePoint> serverPoints) {
+    private void setServerPointAdapter(List<ServicePoint> serverPoints){
         serverPointAdapter = new ServerPointAdapter(this, serverPoints);
         serverPointListView.setAdapter(serverPointAdapter);
     }
@@ -76,23 +80,38 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
      * 部门列表适配
      * @param departmentList
      */
-    private void setDepartmentAdapter(List<Department> departmentList) {
+    private void setDepartmentAdapter(List<Department> departmentList){
         departmentListAdapter = new DepartmentListAdapter(this, departmentList);
         spinnerWindow.setAdapter(departmentListAdapter);
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_department_list);
+        String url = ConCla.getConCla(Properties.WEB_IP, Properties.WEB_PORT, Properties.PROJECT_NAME,
+                Properties.POWER_LINK, Properties.GETDEPARTMENT_ACTION);
         departmentPresenter = new DepartmentPresenterImpl(this);
-        departmentPresenter.obtainDepartment(url, MyApplication.token);
+        departmentPresenter.obtainDepartment(url + "?token=" + MyApplication.token, MyApplication.token);
         initView();
-
+        setListener();
     }
 
-    private void initView() {
-        backImage = (ImageView) findViewById(R.id.back_Image);
+    private void setListener() {
+        serverPointListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ServicePoint servicePoint = null;
+                servicePoint = serverPointList.get(position);
+                Intent intent = new Intent(DepartmentListActivity.this, ServerPointActivity.class);
+                intent.putExtra("serverpoint", servicePoint);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void initView(){
+        backImage = (LinearLayout) findViewById(R.id.back_Image);
         serverPointListView = (ListView) findViewById(R.id.serverPoint_list);
         imageButton = (ImageButton) findViewById(R.id.popup_button);
         departmentTextView = (TextView) findViewById(R.id.department_textView);
@@ -104,7 +123,7 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v){
         switch (v.getId()){
             case R.id.back_Image:
                 finish();
@@ -128,8 +147,8 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
      * 设置屏幕透明度
      * @param bgAlpha
      */
-    private void backgroundAlpha(float bgAlpha) {
-        WindowManager.LayoutParams lp = getWindow().getAttributes();
+    private void backgroundAlpha(float bgAlpha){
+        WindowManager.LayoutParams lp = this.getWindow().getAttributes();
         lp.alpha = bgAlpha; //0.0-1.0
         getWindow().setAttributes(lp);
     }
@@ -139,7 +158,7 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
      * @param departmentList
      */
     @Override
-    public void showDepartmentView(final List<Department> departmentList) {
+    public void showDepartmentView(final List<Department> departmentList){
         this.departmentList = departmentList;
         new Thread(){
             @Override
@@ -153,21 +172,23 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
     }
 
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        Department department = new Department();
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+        String url = ConCla.getConCla(Properties.WEB_IP, Properties.WEB_PORT, Properties.PROJECT_NAME,
+                Properties.POWER_LINK, Properties.GETPOWERAREA_ACTION);
+        Department department;
         department = departmentList.get(position);
         departmentTextView.setText(departmentList.get(position).getDanwmc());
         departmentTextView.setTextSize(12);
         serverPresenter = new ServerPresenterImpl(this);
-        serverPresenter.obtainServerPoint(url2+"?departmentid="+department.getDanwbh(), MyApplication.token);
+        serverPresenter.obtainServerPoint(url + "?departmentid=" + department.getDanwbh(), MyApplication.token);
         onDismiss();
     }
 
     /**
-     * pninner消失
+     * spninner消失
      */
     @Override
-    public void onDismiss() {
+    public void onDismiss(){
         if (spinnerWindow != null){
             spinnerWindow.dismiss();
             imageButton.setImageDrawable(getDrawable(R.drawable.down));
@@ -180,7 +201,7 @@ public class DepartmentListActivity extends Activity implements View.OnClickList
      * @param serverPointList
      */
     @Override
-    public void showServerPointView(final List<ServicePoint> serverPointList) {
+    public void showServerPointView(final List<ServicePoint> serverPointList){
         this.serverPointList = serverPointList;
         new Thread(new Runnable() {
             @Override

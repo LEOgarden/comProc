@@ -14,21 +14,21 @@ import java.util.List;
  * Created by Administrator on 2017/7/24.
  */
 
-public class DepartmentPresenterImpl implements IDepartmentPresenter {
+public class DepartmentPresenterImpl implements IDepartmentPresenter{
 
     private IDepartmentView departmentView;
     private IDepartmentModel departmentModel;
 
-    public DepartmentPresenterImpl(IDepartmentView departmentView) {
+    public DepartmentPresenterImpl(IDepartmentView departmentView){
         this.departmentView = departmentView;
         departmentModel = new DepartmentModelImpl();
     }
 
     @Override
-    public void obtainDepartment(String url, String token) {
-        departmentModel.obtainDepartment(url, token, new DataCallback() {
+    public void obtainDepartment(String url, String token){
+        departmentModel.obtainDepartment(url, token, new DataCallback(){
             @Override
-            public void onSuccess(Object object) {
+            public void onSuccess(Object object){
                 List<Department> departmentList = (List<Department>) object;
                 for(int i = 0; i < departmentList.size(); i++){
                     Log.d("modelCallback", departmentList.get(i).getDanwmc());
@@ -37,8 +37,7 @@ public class DepartmentPresenterImpl implements IDepartmentPresenter {
             }
 
             @Override
-            public void onError() {
-
+            public void onError(){
             }
         });
     }

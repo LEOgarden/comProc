@@ -13,6 +13,6 @@ android:shape="rectangle">
     android:width="3px"
     android:color="#d7d7d7" />
 
-<solid android:color="@android:color/transparent" />
+<solid android:color="@android:color/white" />
 
 </shape>

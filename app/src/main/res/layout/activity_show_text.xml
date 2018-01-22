@@ -9,7 +9,7 @@
     <android.support.v7.widget.Toolbar
         android:id="@+id/substance_toolbar"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="58dp"
         android:background="@color/colorPrimaryDark"
         app:theme="@style/ToolbarTheme">
     </android.support.v7.widget.Toolbar>

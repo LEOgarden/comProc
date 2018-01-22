@@ -17,37 +17,37 @@ import java.util.List;
  * Created by Administrator on 2017/7/24.
  */
 
-public class DepartmentListAdapter extends BaseAdapter {
+public class DepartmentListAdapter extends BaseAdapter{
 
     private Context context;
     private LayoutInflater layoutInflater;
     private List<Department> departmentList;
 
-    public DepartmentListAdapter(Context context, List<Department> departmentList) {
+    public DepartmentListAdapter(Context context, List<Department> departmentList){
         this.context = context;
         this.departmentList = departmentList;
         layoutInflater = LayoutInflater.from(this.context);
     }
 
     @Override
-    public int getCount() {
+    public int getCount(){
         return departmentList.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position){
         return departmentList.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position){
         return position;
     }
 
 
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder viewHolder = null;
 
         if (convertView == null){

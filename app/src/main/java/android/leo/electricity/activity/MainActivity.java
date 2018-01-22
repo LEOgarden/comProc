@@ -7,14 +7,15 @@ import android.content.Intent;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.R;
 import android.leo.electricity.fragment.HomeFragment;
-import android.leo.electricity.fragment.ServicePointFragment;
 import android.leo.electricity.fragment.UseElectricityFragment;
 import android.leo.electricity.fragment.UserFragment;
+import android.leo.electricity.utils.Constants;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -34,34 +35,31 @@ public class MainActivity extends Activity implements View.OnClickListener{
     private RadioGroup radioGroup;
     private RadioButton butHome;
     private RadioButton button2;
-    private RadioButton button3;
+    //private RadioButton button3;
     private RadioButton button4;
     private FragmentManager manager;
     private HomeFragment homeFragment;
-    private ServicePointFragment servicePointFragment;
     private UseElectricityFragment useElectricityFragment;
     private UserFragment userFragment;
     private Button turnToLogin;
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         initView();
-        initLocation();
         setFragment();
-}
+        initLocation();
+    }
 
-    private void setFragment() {
+
+    private void setFragment(){
         manager = getFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();
         homeFragment = new HomeFragment();
-        servicePointFragment = new ServicePointFragment();
         useElectricityFragment = new UseElectricityFragment();
         userFragment = new UserFragment();
         transaction.add(R.id.linearLayout, homeFragment,"homeFragment");
-        transaction.add(R.id.linearLayout, servicePointFragment, "servicePointFragment");
         transaction.add(R.id.linearLayout, useElectricityFragment, "useElectricityFragment");
         transaction.add(R.id.linearLayout, userFragment, "userFragment");
         //默认
@@ -70,7 +68,7 @@ public class MainActivity extends Activity implements View.OnClickListener{
         transaction.commit();
     }
 
-    private void initLocation() {
+    private void initLocation(){
         //初始化locationClient
         locationClient = new AMapLocationClient(MyApplication.getInstance());
         //设置定位参数
@@ -84,16 +82,21 @@ public class MainActivity extends Activity implements View.OnClickListener{
     /**
      * 开始定位
      */
-    private void startLocation() {
-        // 启动定位
-        locationClient.startLocation();
+    private void startLocation(){
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                // 启动定位
+                locationClient.startLocation();
+            }
+        }).start();
     }
 
     /**
      *默认的定位参数
      * @return
      */
-    private AMapLocationClientOption getDefaultOption() {
+    private AMapLocationClientOption getDefaultOption(){
         AMapLocationClientOption mOption = new AMapLocationClientOption();
         mOption.setLocationMode(AMapLocationClientOption.AMapLocationMode.Hight_Accuracy);//可选，设置定位模式，可选的模式有高精度、仅设备、仅网络。默认为高精度模式
         mOption.setGpsFirst(false);//可选，设置是否gps优先，只在高精度模式下有效。默认关闭
@@ -112,20 +115,20 @@ public class MainActivity extends Activity implements View.OnClickListener{
     /**
      * 定位监听
      */
-    AMapLocationListener locationListener = new AMapLocationListener() {
+    AMapLocationListener locationListener = new AMapLocationListener(){
         @Override
-        public void onLocationChanged(AMapLocation location) {
-            if (null != location) {
+        public void onLocationChanged(AMapLocation location){
+            if(null != location){
 
                 //errCode等于0代表定位成功，其他的为定位失败，具体的可以参照官网定位错误码说明
                 if(location.getErrorCode() == 0){
                     String result = location.getCity();
                     locationTextView.setText(result);
                     Log.d("locationTextView", locationTextView.getText().toString());
-                } else {
+                }else{
                     Toast.makeText(MainActivity.this, "定位失败", Toast.LENGTH_SHORT).show();
                 }
-            } else {
+            }else{
                 Toast.makeText(MainActivity.this, "定位失败", Toast.LENGTH_SHORT).show();
             }
         }
@@ -148,17 +151,27 @@ public class MainActivity extends Activity implements View.OnClickListener{
         }
     }
 
+    @Override
+    protected void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
+        if (MyApplication.token != null){
+            turnToLogin.setVisibility(View.GONE);
+        }else {
+            turnToLogin.setVisibility(View.VISIBLE);
+        }
+    }
+
     private void initView() {
         locationImageView = (ImageView) this.findViewById(R.id.location_imageview);
         locationTextView = (TextView) this.findViewById(R.id.location_textview);
         radioGroup = (RadioGroup) findViewById(R.id.radioGroup);
         butHome = (RadioButton) findViewById(R.id.button1);
         button2 = (RadioButton) findViewById(R.id.button2);
-        button3 = (RadioButton) findViewById(R.id.button3);
+        //button3 = (RadioButton) findViewById(R.id.button3);
         button4 = (RadioButton) findViewById(R.id.button4);
         butHome.setOnClickListener(this);
         button2.setOnClickListener(this);
-        button3.setOnClickListener(this);
+        //button3.setOnClickListener(this);
         button4.setOnClickListener(this);
         turnToLogin = (Button) findViewById(R.id.turn_to_loginactivity_button);
         if (MyApplication.token == null){
@@ -176,26 +189,17 @@ public class MainActivity extends Activity implements View.OnClickListener{
         // 事物
         FragmentTransaction transaction = manager.beginTransaction();
         if("homeFragment".equals(tag)){
-            transaction.hide(servicePointFragment);
             transaction.hide(useElectricityFragment);
             transaction.hide(userFragment);
             transaction.show(homeFragment);
         }
-        if ("servicePointFragment".equals(tag)){
-            transaction.hide(homeFragment);
-            transaction.hide(useElectricityFragment);
-            transaction.hide(userFragment);
-            transaction.show(servicePointFragment);
-        }
         if ("useElectricityFragment".equals(tag)){
             transaction.hide(homeFragment);
-            transaction.hide(servicePointFragment);
             transaction.hide(userFragment);
             transaction.show(useElectricityFragment);
         }
         if ("userFragment".equals(tag)){
             transaction.hide(homeFragment);
-            transaction.hide(servicePointFragment);
             transaction.hide(useElectricityFragment);
             transaction.show(userFragment);
         }
@@ -210,9 +214,6 @@ public class MainActivity extends Activity implements View.OnClickListener{
                 break;
             case R.id.button2:
                 switchFragment("useElectricityFragment");
-                break;
-            case R.id.button3:
-                switchFragment("servicePointFragment");
                 break;
             case R.id.button4:
                 switchFragment("userFragment");

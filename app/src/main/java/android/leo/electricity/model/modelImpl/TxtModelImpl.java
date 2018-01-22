@@ -14,32 +14,32 @@ import java.io.UnsupportedEncodingException;
  * Created by Leo on 2017/7/31.
  */
 
-public class TxtModelImpl implements ITxtModel {
+public class TxtModelImpl implements ITxtModel{
     @Override
-    public String getTxtFileToString(int pathId) {
+    public String getTxtFileToString(int pathId){
         InputStream inputStream = MyApplication.getInstance().getResources().openRawResource(pathId);
         BufferedReader reader = null;
-        try {
+        try{
             reader = new BufferedReader(
                     new InputStreamReader(
                             inputStream,
                             "utf-8"));
-        } catch (UnsupportedEncodingException e1) {
+        }catch(UnsupportedEncodingException e1){
             e1.printStackTrace();
         }
 
         StringBuilder sb = new StringBuilder();
         String line = null;
         try {
-            while ((line = reader.readLine()) != null) {
+            while ((line = reader.readLine()) != null){
                 sb.append(line + "\n");
             }
-        } catch (IOException e) {
+        }catch(IOException e){
             e.printStackTrace();
         }finally{
             try {
                 inputStream.close();
-            } catch (IOException e) {
+            }catch(IOException e){
                 e.printStackTrace();
             }
         }

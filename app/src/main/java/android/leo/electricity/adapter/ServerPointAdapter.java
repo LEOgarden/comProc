@@ -16,37 +16,37 @@ import java.util.List;
  * Created by Administrator on 2017/7/24.
  */
 
-public class ServerPointAdapter extends BaseAdapter {
+public class ServerPointAdapter extends BaseAdapter{
 
     private Context context;
     private LayoutInflater layoutInflater;
     private List<ServicePoint> servicePointList;
 
-    public ServerPointAdapter(Context context, List<ServicePoint> servicePointList) {
+    public ServerPointAdapter(Context context, List<ServicePoint> servicePointList){
         this.context = context;
         this.servicePointList = servicePointList;
         layoutInflater = LayoutInflater.from(this.context);
     }
 
     @Override
-    public int getCount() {
+    public int getCount(){
         return servicePointList.size();
     }
 
     @Override
-    public Object getItem(int position) {
+    public Object getItem(int position){
         return servicePointList.get(position);
     }
 
     @Override
-    public long getItemId(int position) {
+    public long getItemId(int position){
         return position;
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, View convertView, ViewGroup parent){
         ViewHolder viewHolder = null;
-        if (convertView == null){
+        if(convertView == null){
             convertView = layoutInflater.inflate(R.layout.server_point_item, null);
             viewHolder = new ViewHolder();
             viewHolder.pointName = (TextView) convertView.findViewById(R.id.serverPointName);

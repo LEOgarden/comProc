@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
  * Created by leo on 2017/7/21.
  */
 
-public class UserValUtil {
+public class UserValUtil{
 
     public static boolean valTelp(String phoneno){
         if(isMatchLength(phoneno,11) && isMobileNo(phoneno)){
@@ -17,7 +17,7 @@ public class UserValUtil {
         return false;
     }
 
-    private static boolean isMobileNo(String phoneno) {
+    private static boolean isMobileNo(String phoneno){
         /*
 		 * 移动：134、135、136、137、138、139、150、151、157(TD)、158、159、187、188
 		 * 联通：130、131、132、152、155、156、185、186 电信：133、153、180、189、（1349卫通）
@@ -30,7 +30,7 @@ public class UserValUtil {
             return phoneno.matches(telRegex);
     }
 
-    private static boolean isMatchLength(String phoneno, int length) {
+    private static boolean isMatchLength(String phoneno, int length){
         if(phoneno.isEmpty()){
             return false;
         }else{

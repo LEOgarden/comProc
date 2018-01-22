@@ -11,31 +11,31 @@ import java.util.List;
  * Created by Leo on 2017/7/10.
  */
 
-public class AdViewPagerAdapter extends PagerAdapter {
+public class AdViewPagerAdapter extends PagerAdapter{
 
     private List<ImageView> images;
 
-    public AdViewPagerAdapter(List<ImageView> images) {
+    public AdViewPagerAdapter(List<ImageView> images){
         this.images = images;
     }
 
     @Override
-    public int getCount() {
+    public int getCount(){
         return images.size();
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object obj) {
+    public boolean isViewFromObject(View view, Object obj){
         return view == obj;
     }
 
     @Override
-    public void destroyItem(ViewGroup view, int position, Object object) {
+    public void destroyItem(ViewGroup view, int position, Object object){
         view.removeView(images.get(position));
     }
 
     @Override
-    public Object instantiateItem(ViewGroup view, int position) {
+    public Object instantiateItem(ViewGroup view, int position){
         // TODO Auto-generated method stub
         view.addView(images.get(position));
         return images.get(position);

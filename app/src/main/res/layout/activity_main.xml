@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_ac"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -8,47 +9,47 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#000000"
-        android:gravity="center_vertical">
+        android:layout_height="58dp"
+        android:background="#000000">
 
         <ImageView
             android:id="@+id/location_imageview"
             android:layout_width="20dp"
             android:layout_height="20dp"
-            android:src="@drawable/location"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10sp"/>
+            android:layout_marginLeft="16dp"
+            android:src="@drawable/location" />
 
         <TextView
             android:id="@+id/location_textview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/location_imageview"
             android:text="位置信息"
             android:textColor="#ffffff"
-            android:textSize="8sp"
-            android:layout_centerVertical="true"
-            />
+            android:textSize="12dp" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="掌上营业厅"
+            android:layout_centerInParent="true"
             android:gravity="center"
+            android:text="掌上营业厅"
             android:textColor="#ffffff"
-            android:textSize="12sp"
-            android:layout_centerInParent="true"/>
+            android:textSize="18dp" />
 
         <Button
             android:id="@+id/turn_to_loginactivity_button"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:text="登录"
-            android:textSize="8sp"
-            android:textColor="#ffffff"
-            android:background="@null"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="20dp"/>
+            android:layout_marginRight="20dp"
+            android:background="@null"
+            android:text="登录"
+            android:textColor="#ffffff"
+            android:textSize="10dp"
+            android:layout_centerVertical="true"/>
     </RelativeLayout>
 
     <LinearLayout
@@ -63,7 +64,7 @@
     <RadioGroup
         android:id="@+id/radioGroup"
         android:layout_width="match_parent"
-        android:layout_height="40dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:gravity="bottom"
         android:background="#f7f7f7">
@@ -81,8 +82,7 @@
             android:padding="2dp"
             android:text="首页"
             android:textColor="@color/radiobutton_textcolor_selector"
-            android:textSize="8sp"
-            />
+            android:textSize="8dp" />
 
         <RadioButton
             android:id="@+id/button2"
@@ -91,26 +91,12 @@
             android:layout_weight="1"
             android:button="@null"
             android:text="用电"
-            android:textSize="8sp"
+            android:textSize="8dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:drawableTop="@drawable/but_power_selector"
             android:textColor="@color/radiobutton_textcolor_selector"
-            android:padding="2dp"
-            />
-        <RadioButton
-            android:id="@+id/button3"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:button="@null"
-            android:text="服务"
-            android:textSize="8sp"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:drawableTop="@drawable/but_service_selector"
-            android:textColor="@color/radiobutton_textcolor_selector"
-            android:padding="2dp"/>
+            android:padding="2dp" />
         <RadioButton
             android:id="@+id/button4"
             android:layout_width="0dp"
@@ -118,7 +104,7 @@
             android:layout_weight="1"
             android:button="@null"
             android:text="用户"
-            android:textSize="8sp"
+            android:textSize="8dp"
             android:layout_gravity="center"
             android:gravity="center"
             android:drawableTop="@drawable/but_user_selector"

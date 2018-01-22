@@ -1,11 +1,9 @@
 package android.leo.electricity.model.modelImpl;
 
 import android.leo.electricity.bean.Department;
-import android.leo.electricity.bean.ServicePoint;
 import android.leo.electricity.callback.DataCallback;
 import android.leo.electricity.model.IDepartmentModel;
 import android.leo.electricity.utils.OkHttpUtil;
-import android.provider.Settings;
 import android.util.Log;
 
 import org.json.JSONArray;
@@ -24,33 +22,32 @@ import okhttp3.Response;
  * Created by Leo on 2017/7/24.
  */
 
-public class DepartmentModelImpl implements IDepartmentModel {
+public class DepartmentModelImpl implements IDepartmentModel{
 
     private List<Department> departmentList;
     @Override
-    public void obtainDepartment(String url, String token, final DataCallback callback) {
-        OkHttpUtil.getInstance().serverPointPost(url, token, new Callback() {
+    public void obtainDepartment(String url, String token, final DataCallback callback){
+        OkHttpUtil.getInstance().serverPointPost(url, token, new Callback(){
             @Override
-            public void onFailure(Call call, IOException e) {
-
+            public void onFailure(Call call, IOException e){
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException{
                 String responseStr = response.body().string();
                 handleResponse(responseStr, callback);
             }
         });
     }
 
-    private void handleResponse(String responseStr, DataCallback callback) {
-        try {
+    private void handleResponse(String responseStr, DataCallback callback){
+        try{
             JSONObject jsonObject = new JSONObject(responseStr);
             String result = jsonObject.getString("result");
             departmentList = new ArrayList<>();
-            if ("true".equals(result)){
+            if("true".equals(result)){
                 JSONArray dataArray = jsonObject.getJSONArray("data");
-                for (int i = 0; i < dataArray.length(); i++){
+                for(int i = 0; i < dataArray.length(); i++){
                     JSONObject departmentObj = dataArray.getJSONObject(i);
                     Department department = new Department();
                     department.setCengc(departmentObj.getString("cengc"));
@@ -60,12 +57,9 @@ public class DepartmentModelImpl implements IDepartmentModel {
                     department.setShangjdwbh(departmentObj.getString("shangjdwbh"));
                     departmentList.add(department);
                 }
-                for(int i = 0; i < departmentList.size(); i++){
-                    Log.d("callback", departmentList.get(i).getDanwmc());
-                }
                 callback.onSuccess(departmentList);
             }
-        } catch (JSONException e) {
+        }catch(JSONException e){
             e.printStackTrace();
         }
     }

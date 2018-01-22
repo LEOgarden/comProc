@@ -4,7 +4,7 @@ package android.leo.electricity.utils;
  * Created by Administrator on 2017/7/20.
  */
 
-public class ExceptionHandler implements Thread.UncaughtExceptionHandler {
+public class ExceptionHandler implements Thread.UncaughtExceptionHandler{
     @Override
     public void uncaughtException(Thread t, Throwable e) {
         System.out.printf("An exception has been captured\n");

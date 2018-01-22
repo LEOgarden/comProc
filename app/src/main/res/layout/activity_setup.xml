@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-tools:context="android.leo.electricity.activity.user.SetupActivity">
-
-    <LinearLayout
-        android:layout_width="344dp"
-        android:layout_height="wrap_content"
-        android:background="#fff"
-        android:orientation="vertical">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="android.leo.electricity.activity.user.SetupActivity">
 
         <RelativeLayout
             android:id="@+id/relativeLayout1"
             android:layout_width="match_parent"
-            android:layout_height="50dip"
-            android:background="#0083f3" >
+            android:layout_height="58dp"
+            android:background="@color/colorPrimary" >
 
             <TextView
                 android:layout_width="match_parent"
@@ -24,18 +20,21 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                 android:layout_centerVertical="true"
                 android:gravity="center_horizontal"
                 android:text="设置"
-
                 android:textColor="#ffffff"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:textSize="18dp"/>
 
-            <ImageView
+            <LinearLayout
                 android:id="@+id/back_setup"
+                android:layout_width="58dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center">
+            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentLeft="true"
                 android:layout_centerVertical="true"
-                android:src="@drawable/question" />
+                android:src="@drawable/back3" />
+            </LinearLayout>
         </RelativeLayout>
 
         <LinearLayout
@@ -64,15 +63,15 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="关于系统"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/imageView1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/question" />
+                    android:src="@drawable/right"
+                    android:layout_centerVertical="true"/>
 
             </RelativeLayout>
             <RelativeLayout
@@ -92,14 +91,14 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="功能介绍"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/question" />
+                    android:src="@drawable/right"
+                    android:layout_centerVertical="true"/>
 
             </RelativeLayout>
 
@@ -121,15 +120,15 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="版本更新"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
 
                 <ImageView
                     android:id="@+id/imageView3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/question" />
+                    android:src="@drawable/right"
+                    android:layout_centerVertical="true"/>
 
                 <TextView
                     android:id="@+id/version_dynamic"
@@ -139,16 +138,8 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_marginRight="21dp"
                     android:layout_toLeftOf="@+id/imageView3"
                     android:textColor="#808080"
-                    android:text="已是最新版本" />
-
-                <ImageView
-                    android:id="@+id/dynamic"
-                    android:layout_width="10dp"
-                    android:layout_height="10dp"
-                    android:layout_centerVertical="true"
-                    android:layout_toLeftOf="@+id/imageView3"
-                    android:layout_marginRight="7dp"
-                    android:src="@drawable/question" />
+                    android:text="已是最新版本"
+                    android:textSize="10dp"/>
 
             </RelativeLayout>
 
@@ -165,9 +156,8 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                 android:layout_marginTop="17dp" >
             </RelativeLayout>
 
-
             <RelativeLayout
-                android:id="@+id/clearCahceBtn"
+                android:id="@+id/cleanCacheBtn"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="#fff"
@@ -177,15 +167,25 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="清除缓存"
-                    android:textSize="16sp" />
+                    android:textSize="16dp" />
+                <TextView
+                    android:id="@+id/cacheSize"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0.0M"
+                    android:textSize="10dp"
+                    android:textColor="@color/dark"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@+id/setImageView5"
+                    android:layout_marginRight="21dp"/>
 
                 <ImageView
+                    android:id="@+id/setImageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/question" />
-
+                    android:src="@drawable/right"
+                    android:layout_centerVertical="true"/>
             </RelativeLayout>
             <RelativeLayout
                 android:layout_width="fill_parent"
@@ -205,15 +205,15 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="版权声明"
-                    android:textSize="16sp"/>
+                    android:textSize="16dp"/>
 
                 <ImageView
                     android:id="@+id/image_author"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/question" />
+                    android:src="@drawable/right"
+                    android:layout_centerVertical="true"/>
 
             </RelativeLayout>
             <RelativeLayout
@@ -234,15 +234,15 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="帮助反馈"
-                    android:textSize="16sp"/>
+                    android:textSize="16dp"/>
 
                 <ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_alignParentTop="true"
-                    android:src="@drawable/question" />
+                    android:src="@drawable/right"
+                    android:layout_centerVertical="true"/>
 
             </RelativeLayout>
             <RelativeLayout
@@ -265,13 +265,14 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                 <Button
                     android:id="@+id/exit_system"
                     android:layout_width="fill_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="wrap_content"
                     android:text="安全退出"
                     android:layout_weight="1"
                     android:textStyle="bold"
-                    android:textSize="18sp"
+                    android:textSize="18dp"
                     android:textColor="#fff"
-                    android:layout_marginRight="2dp" />
+                    android:layout_marginRight="2dp"
+                    android:background="@color/color_orange"/>
 
             </RelativeLayout>
             <RelativeLayout
@@ -280,7 +281,4 @@ tools:context="android.leo.electricity.activity.user.SetupActivity">
                 android:background="#ebebeb" >
             </RelativeLayout>
         </LinearLayout>
-
-    </LinearLayout>
-
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>

@@ -39,7 +39,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 
 @SuppressLint("AppCompatCustomView")
-public class CircleImageView extends ImageView {
+public class CircleImageView extends ImageView{
 
     private static final ScaleType SCALE_TYPE = ScaleType.CENTER_CROP;
 
@@ -78,17 +78,17 @@ public class CircleImageView extends ImageView {
     private boolean mBorderOverlay;
     private boolean mDisableCircularTransformation;
 
-    public CircleImageView(Context context) {
+    public CircleImageView(Context context){
         super(context);
 
         init();
     }
 
-    public CircleImageView(Context context, AttributeSet attrs) {
+    public CircleImageView(Context context, AttributeSet attrs){
         this(context, attrs, 0);
     }
 
-    public CircleImageView(Context context, AttributeSet attrs, int defStyle) {
+    public CircleImageView(Context context, AttributeSet attrs, int defStyle){
         super(context, attrs, defStyle);
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CircleImageView, defStyle, 0);
@@ -103,79 +103,79 @@ public class CircleImageView extends ImageView {
         init();
     }
 
-    private void init() {
+    private void init(){
         super.setScaleType(SCALE_TYPE);
         mReady = true;
 
-        if (mSetupPending) {
+        if (mSetupPending){
             setup();
             mSetupPending = false;
         }
     }
 
     @Override
-    public ScaleType getScaleType() {
+    public ScaleType getScaleType(){
         return SCALE_TYPE;
     }
 
     @Override
-    public void setScaleType(ScaleType scaleType) {
-        if (scaleType != SCALE_TYPE) {
+    public void setScaleType(ScaleType scaleType){
+        if(scaleType != SCALE_TYPE){
             throw new IllegalArgumentException(String.format("ScaleType %s not supported.", scaleType));
         }
     }
 
     @Override
-    public void setAdjustViewBounds(boolean adjustViewBounds) {
-        if (adjustViewBounds) {
+    public void setAdjustViewBounds(boolean adjustViewBounds){
+        if(adjustViewBounds){
             throw new IllegalArgumentException("adjustViewBounds not supported.");
         }
     }
 
     @Override
-    protected void onDraw(Canvas canvas) {
-        if (mDisableCircularTransformation) {
+    protected void onDraw(Canvas canvas){
+        if(mDisableCircularTransformation){
             super.onDraw(canvas);
             return;
         }
 
-        if (mBitmap == null) {
+        if(mBitmap == null){
             return;
         }
 
-        if (mFillColor != Color.TRANSPARENT) {
+        if(mFillColor != Color.TRANSPARENT){
             canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mFillPaint);
         }
         canvas.drawCircle(mDrawableRect.centerX(), mDrawableRect.centerY(), mDrawableRadius, mBitmapPaint);
-        if (mBorderWidth > 0) {
+        if(mBorderWidth > 0){
             canvas.drawCircle(mBorderRect.centerX(), mBorderRect.centerY(), mBorderRadius, mBorderPaint);
         }
     }
 
     @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+    protected void onSizeChanged(int w, int h, int oldw, int oldh){
         super.onSizeChanged(w, h, oldw, oldh);
         setup();
     }
 
     @Override
-    public void setPadding(int left, int top, int right, int bottom) {
+    public void setPadding(int left, int top, int right, int bottom){
         super.setPadding(left, top, right, bottom);
         setup();
     }
 
     @Override
-    public void setPaddingRelative(int start, int top, int end, int bottom) {
+    public void setPaddingRelative(int start, int top, int end, int bottom){
         super.setPaddingRelative(start, top, end, bottom);
         setup();
     }
 
-    public int getBorderColor() {
+    public int getBorderColor(){
         return mBorderColor;
     }
 
-    public void setBorderColor(@ColorInt int borderColor) {
-        if (borderColor == mBorderColor) {
+    public void setBorderColor(@ColorInt int borderColor){
+        if (borderColor == mBorderColor){
             return;
         }
 

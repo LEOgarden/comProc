@@ -7,6 +7,6 @@ import android.leo.electricity.callback.DataCallback;
  * Created by Administrator on 2017/7/24.
  */
 
-public interface IServerModel {
+public interface IServerModel{
     void obtainServerPoint(String url, String token, DataCallback callback);
 }

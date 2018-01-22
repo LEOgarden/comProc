@@ -1,11 +1,14 @@
 package android.leo.electricity.activity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.bean.LoginInfo;
 import android.leo.electricity.model.LoginModel;
+import android.leo.electricity.utils.ConCla;
 import android.leo.electricity.utils.Md5;
 import android.leo.electricity.utils.OkHttpUtil;
+import android.leo.electricity.utils.Properties;
 import android.leo.electricity.utils.SharedPerferencesUtil;
 import android.leo.electricity.utils.UserValUtil;
 import android.os.Looper;
@@ -14,6 +17,7 @@ import android.os.Bundle;
 import android.leo.electricity.R;
 import android.util.Log;
 import android.view.View;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -37,14 +41,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private CheckBox rememberPwd;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
         initView();
+        SharedPreferences sp = getSharedPreferences("share_data", MODE_PRIVATE);
+        String phoneno = sp.getString("phoneNo", null);
+        usernameEditText.setText(phoneno);
     }
 
-    private void initView() {
+    private void initView(){
         turnToMainActivity = (ImageView) findViewById(R.id.turn_to_MainActivity);
         usernameEditText = (EditText) findViewById(R.id.username_editText);
         passwordEditText = (EditText) findViewById(R.id.password_editText);
@@ -58,28 +65,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     @Override
-    public void onClick(View v) {
+    public void onClick(View v){
         Intent intent;
-        switch (v.getId()){
+        switch(v.getId()){
             case R.id.turn_to_MainActivity:
-                intent = new Intent(this, MainActivity.class);
-                startActivity(intent);
                 finish();
                 break;
             case R.id.login_button:
                 String phoneno = usernameEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
-                if (UserValUtil.valTelp(phoneno)){
+                if(UserValUtil.valTelp(phoneno)){
                     if (password.length() >= 6){
-                        try {
+                        try{
                             login();
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
-                    }else {
+                    }else{
                         Toast.makeText(this, "请输入正确密码", Toast.LENGTH_SHORT).show();
                     }
-                }else {
+                }else{
                     Toast.makeText(this, "手机号格式非法", Toast.LENGTH_SHORT).show();
                 }
                 break;
@@ -96,32 +101,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     /**
      * 处理登陆事件
      */
-    private void login() throws IOException {
+    private void login() throws IOException{
         final String phoneno = usernameEditText.getText().toString();
         final String password = passwordEditText.getText().toString();
-        String url = "http://192.168.0.63:8080/ws/AppUser/userService/login?phoneno="+phoneno+"&password="+Md5.getMD5(password);
-        OkHttpUtil.getInstance().loginPost(url, phoneno, password, new Callback() {
+        String path = ConCla.getConCla(Properties.WEB_IP, Properties.WEB_PORT, Properties.PROJECT_NAME,
+                Properties.USER_LINK, Properties.LOGIN_ACTION);
+        String url = path + "?phoneno=" + phoneno + "&password=" + Md5.getMD5(password);
+        OkHttpUtil.getInstance().loginPost(url, phoneno, password, new Callback(){
             @Override
-            public void onFailure(Call call, IOException e) {
-
+            public void onFailure(Call call, IOException e){
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException{
                 String responseBody = response.body().string();
                 LoginInfo loginInfo = new LoginInfo();
                 loginInfo = LoginModel.getLoginInfo(responseBody);
                 MyApplication.token = loginInfo.getToken();
-                if ("true".equals(loginInfo.getResult())){
-                    SharedPerferencesUtil.setParam(LoginActivity.this, "phoneno", phoneno);
-                    if (rememberPwd.isChecked()) {
-                        SharedPerferencesUtil.setParam(LoginActivity.this, "password", password);
-                        SharedPerferencesUtil.setParam(LoginActivity.this, "token", loginInfo.getToken());
-                    }
+                if("true".equals(loginInfo.getResult())){
+                    SharedPerferencesUtil.setParam(LoginActivity.this, "phoneNo", phoneno, "share_data");
+                    MyApplication.phone = phoneno;
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
-                }else {
+                }else{
                     Looper.prepare();
                     Toast.makeText(LoginActivity.this, loginInfo.getMsg(), Toast.LENGTH_SHORT).show();
                     Looper.loop();

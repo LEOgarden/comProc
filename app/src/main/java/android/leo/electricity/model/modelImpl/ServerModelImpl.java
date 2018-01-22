@@ -21,31 +21,30 @@ import okhttp3.Response;
  * Created by Administrator on 2017/7/24.
  */
 
-public class ServerModelImpl implements IServerModel {
+public class ServerModelImpl implements IServerModel{
 
     private List<ServicePoint> serviceList;
     @Override
-    public void obtainServerPoint(String url, String token, final DataCallback callback) {
-        OkHttpUtil.serverPointPost(url, token, new Callback() {
+    public void obtainServerPoint(String url, String token, final DataCallback callback){
+        OkHttpUtil.serverPointPost(url, token, new Callback(){
             @Override
-            public void onFailure(Call call, IOException e) {
-
+            public void onFailure(Call call, IOException e){
             }
 
             @Override
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException{
                 String responseStr = response.body().string();
                 handleResponse(responseStr, callback);
             }
         });
     }
 
-    private void handleResponse(String responseStr, DataCallback callback) {
+    private void handleResponse(String responseStr, DataCallback callback){
         try {
             JSONObject jsonObject = new JSONObject(responseStr);
             String result = jsonObject.getString("result");
             serviceList = new ArrayList<>();
-            if ("true".equals(result)){
+            if("true".equals(result)){
                 JSONArray dataArray = jsonObject.getJSONArray("data");
                 for (int i = 0; i < dataArray.length(); i++){
                     ServicePoint servicePoint = new ServicePoint();
@@ -62,7 +61,7 @@ public class ServerModelImpl implements IServerModel {
                 }
                 callback.onSuccess(serviceList);
             }
-        } catch (JSONException e) {
+        }catch(JSONException e){
             e.printStackTrace();
         }
     }

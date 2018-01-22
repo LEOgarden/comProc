@@ -13,31 +13,28 @@ import java.util.List;
  * Created by Administrator on 2017/7/24.
  */
 
-public class ServerPresenterImpl implements IServerPresenter {
+public class ServerPresenterImpl implements IServerPresenter{
 
     private IServerModel serverModel;
     private IServerView serverView;
 
-    public ServerPresenterImpl(IServerView serverView) {
+    public ServerPresenterImpl(IServerView serverView){
         this.serverView = serverView;
         serverModel = new ServerModelImpl();
-
     }
 
     @Override
-    public void obtainServerPoint(String url, String token) {
-        serverModel.obtainServerPoint(url, token, new DataCallback() {
+    public void obtainServerPoint(String url, String token){
+        serverModel.obtainServerPoint(url, token, new DataCallback(){
             @Override
-            public void onSuccess(Object object) {
+            public void onSuccess(Object object){
                 List<ServicePoint> servicePointList = (List<ServicePoint>) object;
                 serverView.showServerPointView(servicePointList);
             }
 
             @Override
-            public void onError() {
-
+            public void onError(){
             }
         });
-
     }
 }

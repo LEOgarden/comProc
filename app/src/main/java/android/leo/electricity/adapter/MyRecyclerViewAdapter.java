@@ -15,7 +15,7 @@ import java.util.List;
  * Created by Leo on 2017/7/7.
  */
 
-public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     public static final int TYPE_HEADER = 0;
     public static final int TYPE_NORMAL = 1;
@@ -26,51 +26,51 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
 
     private OnItemClickListener mListener;
 
-    public void setOnItemClickListener(OnItemClickListener li) {
+    public void setOnItemClickListener(OnItemClickListener li){
         mListener = li;
     }
 
-    public void setHeaderView(View headerView) {
+    public void setHeaderView(View headerView){
         mHeaderView = headerView;
         notifyItemInserted(0);
     }
 
-    public View getHeaderView() {
+    public View getHeaderView(){
         return mHeaderView;
     }
 
-    public void addBitmap(List<Bitmap> bitmaps) {
+    public void addBitmap(List<Bitmap> bitmaps){
         bitmapDrawables.addAll(bitmaps);
         notifyDataSetChanged();
     }
 
     @Override
-    public int getItemViewType(int position) {
+    public int getItemViewType(int position){
         if(mHeaderView == null) return TYPE_NORMAL;
         if(position == 0) return TYPE_HEADER;
         return TYPE_NORMAL;
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
         if(mHeaderView != null && viewType == TYPE_HEADER) return new Holder(mHeaderView);
         View layout = LayoutInflater.from(parent.getContext()).inflate(R.layout.recyclerview_item, parent, false);
         return new Holder(layout);
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int position){
 
         if(getItemViewType(position) == TYPE_HEADER) return;
 
         final int pos = getRealPosition(viewHolder);
         final Bitmap bitmap = bitmapDrawables.get(pos);
-        if(viewHolder instanceof Holder) {
+        if(viewHolder instanceof Holder){
             ((Holder) viewHolder).imageView.setImageBitmap(bitmap);
             if(mListener == null) return;
-            viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
+            viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
                 @Override
-                public void onClick(View v) {
+                public void onClick(View v){
                     mListener.onItemClick(pos, bitmap);
                 }
             });
@@ -83,22 +83,22 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.Vie
     }
 
     @Override
-    public int getItemCount() {
+    public int getItemCount(){
         return 0;
     }
 
-    class Holder extends RecyclerView.ViewHolder {
+    class Holder extends RecyclerView.ViewHolder{
 
         ImageView imageView;
 
-        public Holder(View itemView) {
+        public Holder(View itemView){
             super(itemView);
             if(itemView == mHeaderView) return;
             imageView = (ImageView) itemView.findViewById(R.id.recycleView_item_imageView);
         }
     }
 
-    interface OnItemClickListener {
+    interface OnItemClickListener{
         void onItemClick(int position, Bitmap bitmap);
     }
 }

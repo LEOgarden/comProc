@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.TextView;
 
-public class ShowTextActivity extends AppCompatActivity {
+public class ShowTextActivity extends AppCompatActivity{
 
     private Toolbar substanceToolbar;
     private String title;
@@ -19,7 +19,7 @@ public class ShowTextActivity extends AppCompatActivity {
     private TextView textSubstance;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_text);
         Intent intent = this.getIntent();
@@ -31,22 +31,22 @@ public class ShowTextActivity extends AppCompatActivity {
     }
 
     private void setListener() {
-        substanceToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+        substanceToolbar.setNavigationOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v) {
+            public void onClick(View v){
                 finish();
             }
         });
     }
 
-    private void setElements() {
-        substanceToolbar.setNavigationIcon(R.drawable.back2);
+    private void setElements(){
+        substanceToolbar.setNavigationIcon(R.drawable.back3);
         substanceToolbar.setTitle(title);
         String substance = txtModel.getTxtFileToString(pathId);
         textSubstance.setText(substance);
     }
 
-    private void initView() {
+    private void initView(){
         txtModel = new TxtModelImpl();
         substanceToolbar = (Toolbar) findViewById(R.id.substance_toolbar);
         textSubstance = (TextView) findViewById(R.id.substance);
