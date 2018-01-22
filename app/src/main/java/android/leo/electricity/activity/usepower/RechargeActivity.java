@@ -100,42 +100,42 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             case R.id.money_50:
                 str = money50.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Long.parseLong(charge);
+                paySum = Long.parseLong(charge) * 100l;
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_100:
                 str = money100.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Long.parseLong(charge);
+                paySum = Long.parseLong(charge) * 100l;
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_150:
                 str = money150.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Long.parseLong(charge);
+                paySum = Long.parseLong(charge) * 100l;
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_200:
                 str = money200.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Long.parseLong(charge);
+                paySum = Long.parseLong(charge) * 100l;
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_300:
                 str = money300.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Long.parseLong(charge);
+                paySum = Long.parseLong(charge) * 100l;
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_500:
                 str = money500.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Long.parseLong(charge);
+                paySum = Long.parseLong(charge) * 100l;
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
