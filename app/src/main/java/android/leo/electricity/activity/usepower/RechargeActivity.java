@@ -63,16 +63,26 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
         recEdt = (EditText) findViewById(R.id.recEdt);
         recTxt = (TextView) findViewById(R.id.recTxt);
         money50 = (Button) findViewById(R.id.money_50);
+        money100 = (Button) findViewById(R.id.money_100);
+        money150 = (Button) findViewById(R.id.money_150);
+        money200 = (Button) findViewById(R.id.money_200);
+        money300 = (Button) findViewById(R.id.money_300);
+        money500 = (Button) findViewById(R.id.money_500);
         recBack.setOnClickListener(this);
         recEdt.setOnClickListener(this);
         money50.setOnClickListener(this);
+        money100.setOnClickListener(this);
+        money150.setOnClickListener(this);
+        money200.setOnClickListener(this);
+        money300.setOnClickListener(this);
+        money500.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v){
         String str ;
         String charge;
-        double paySum;
+        long paySum;
         String payMpney;
         String urlString="https://api.mch.weixin.qq.com/pay/unifiedorder";
         PrePayIdAsyncTask prePayIdAsyncTask=new PrePayIdAsyncTask();
@@ -90,42 +100,42 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
             case R.id.money_50:
                 str = money50.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Double.parseDouble(charge);
+                paySum = Long.parseLong(charge);
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_100:
                 str = money100.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Double.parseDouble(charge);
+                paySum = Long.parseLong(charge);
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_150:
                 str = money150.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Double.parseDouble(charge);
+                paySum = Long.parseLong(charge);
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_200:
                 str = money200.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Double.parseDouble(charge);
+                paySum = Long.parseLong(charge);
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_300:
                 str = money300.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Double.parseDouble(charge);
+                paySum = Long.parseLong(charge);
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
             case R.id.money_500:
                 str = money500.getText().toString().trim();
                 charge = str.substring(0,str.length()-1);
-                paySum = Double.parseDouble(charge);
+                paySum = Long.parseLong(charge);
                 payMpney = String.valueOf(paySum);
                 prePayIdAsyncTask.execute(urlString, payMpney);//生成prepayId
                 break;
@@ -236,6 +246,7 @@ public class RechargeActivity extends AppCompatActivity implements View.OnClickL
     }
 
     private String getProductArgs(String payMoney) {
+        Log.w("payMoney", payMoney);
         StringBuffer xml=new StringBuffer();
         try {
             String nonceStr=getNonceStr();
