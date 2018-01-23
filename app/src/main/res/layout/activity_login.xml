@@ -48,7 +48,7 @@
                 android:layout_height="40dp"
                 android:layout_gravity="center_horizontal"
                 android:background="@drawable/editshape2"
-                android:hint="用户名"
+                android:hint="请输入手机号"
                 android:textSize="15dp"
                 android:textColor="#474747"
                 android:focusable="true"
@@ -63,7 +63,7 @@
                 android:background="@drawable/editshape2"
                 android:layout_marginTop="30dp"
                 android:inputType="textPassword"
-                android:hint="密码"
+                android:hint="请输入密码"
                 android:textSize="15dp"
                 android:textColor="#474747"
                 android:focusable="true"
@@ -77,7 +77,7 @@
                 android:layout_gravity="center_horizontal"
                 android:checked="false"
                 android:text="记住密码"
-                />
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/login_button"

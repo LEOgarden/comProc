@@ -1,5 +1,6 @@
 package android.leo.electricity.utils;
 
+import android.leo.electricity.MyApplication;
 import android.leo.electricity.bean.ApplyInfo;
 import android.util.Log;
 
@@ -163,7 +164,7 @@ public class OkHttpUtil{
      */
     public static void checkUserHH(String url, String token, Callback callback){
         FormBody.Builder builder = new FormBody.Builder();
-        builder.add("token", token);
+        builder.add("token", MyApplication.token);
         FormBody body = builder.build();
         Request request = new Request.Builder().
                 url(url).

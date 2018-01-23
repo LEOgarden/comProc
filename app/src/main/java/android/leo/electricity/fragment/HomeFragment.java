@@ -1,23 +1,18 @@
 package android.leo.electricity.fragment;
 
 
-import android.app.Activity;
 import android.app.Fragment;
-import android.content.Context;
 import android.content.Intent;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.R;
 import android.leo.electricity.activity.LoginActivity;
-import android.leo.electricity.activity.home.ArrearageActivity;
 import android.leo.electricity.activity.home.ArrearageUserListActivity;
-import android.leo.electricity.activity.home.BillRecordActivity;
 import android.leo.electricity.activity.home.BindActivity;
 import android.leo.electricity.activity.home.CheckActivity;
-import android.leo.electricity.activity.home.ElectricUsedActivity;
 import android.leo.electricity.activity.home.NoticeActivity;
 import android.leo.electricity.activity.home.PowerUserListActivity;
 import android.leo.electricity.activity.home.RecordUserListActivity;
-import android.leo.electricity.activity.service.DepartmentListActivity;
+import android.leo.electricity.activity.user.DepartmentListActivity;
 import android.leo.electricity.activity.usepower.ApplyActivity;
 import android.leo.electricity.adapter.AdViewPagerAdapter;
 import android.os.Bundle;
@@ -27,11 +22,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;

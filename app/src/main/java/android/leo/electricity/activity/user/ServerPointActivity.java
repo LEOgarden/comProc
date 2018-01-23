@@ -1,4 +1,4 @@
-package android.leo.electricity.activity.service;
+package android.leo.electricity.activity.user;
 
 import android.leo.electricity.bean.ServicePoint;
 import android.support.v7.app.AppCompatActivity;

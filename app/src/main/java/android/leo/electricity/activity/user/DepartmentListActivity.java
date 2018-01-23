@@ -1,8 +1,7 @@
-package android.leo.electricity.activity.service;
+package android.leo.electricity.activity.user;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Path;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.adapter.DepartmentListAdapter;
 import android.leo.electricity.adapter.ServerPointAdapter;
@@ -25,7 +24,6 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;

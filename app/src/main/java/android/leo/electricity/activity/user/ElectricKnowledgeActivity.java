@@ -1,4 +1,4 @@
-package android.leo.electricity.activity.service;
+package android.leo.electricity.activity.user;
 
 import android.content.Intent;
 import android.leo.electricity.activity.ShowTextActivity;

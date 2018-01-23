@@ -5,10 +5,9 @@ import android.content.Intent;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.activity.LoginActivity;
 import android.leo.electricity.activity.home.BindActivity;
-import android.leo.electricity.activity.service.ElectricKnowledgeActivity;
+import android.leo.electricity.activity.user.ElectricKnowledgeActivity;
 import android.leo.electricity.activity.user.ChangePwdValCodeActivity;
 import android.leo.electricity.activity.user.ConsultActivity;
-import android.leo.electricity.activity.user.ModifyActivity;
 import android.leo.electricity.activity.user.SetupActivity;
 import android.leo.electricity.activity.user.SuggestActivity;
 import android.leo.electricity.activity.user.UnbindActivity;
@@ -19,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.leo.electricity.R;
-import android.widget.Button;
 import android.widget.ImageView;
 
 /**

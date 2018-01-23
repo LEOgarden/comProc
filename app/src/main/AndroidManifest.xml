@@ -50,6 +50,7 @@
             android:value="847c9397ee97995b3b5227c9bd30d8a1" />
         <!-- 定位需要的服务 -->
         <service android:name="com.amap.api.location.APSService" />
+        <service android:name=".activity.service.UserService" />
 
         <activity
             android:name=".activity.MainActivity"
@@ -59,9 +60,9 @@
             android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity android:name=".activity.RegisterActivity" />
         <activity android:name=".activity.user.SetupActivity" />
-        <activity android:name=".activity.service.DepartmentListActivity" />
-        <activity android:name=".activity.service.ServerPointActivity" />
-        <activity android:name=".activity.service.ElectricKnowledgeActivity" />
+        <activity android:name=".activity.user.DepartmentListActivity" />
+        <activity android:name=".activity.user.ServerPointActivity" />
+        <activity android:name=".activity.user.ElectricKnowledgeActivity" />
         <activity android:name=".activity.ShowTextActivity" />
         <activity android:name=".activity.home.ElectricUsedActivity" />
         <activity android:name=".activity.home.BillRecordActivity" />
@@ -102,11 +103,13 @@
         <activity android:name=".activity.user.ChangePwdValCodeActivity" />
         <activity android:name=".activity.user.AboutSystemActivity" />
         <activity android:name=".wxapi.WXPayEntryActivity" />
-        <activity android:name=".wxapi.WXEntryActivity"
+        <activity
+            android:name=".wxapi.WXEntryActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:launchMode="singleTop">
-        </activity>
+            android:launchMode="singleTop" />
+        <activity android:name=".FunctionUnableActivity" />
+        <activity android:name=".activity.usepower.PaymentActivity"></activity>
     </application>
 
 </manifest>
