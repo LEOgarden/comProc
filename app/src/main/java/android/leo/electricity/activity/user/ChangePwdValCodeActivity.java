@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.leo.electricity.R;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.io.IOException;
@@ -27,6 +28,7 @@ public class ChangePwdValCodeActivity extends AppCompatActivity implements View.
     private TextView sendChangeValCode;
     private final ChangeValCodeHandler mHandler = new ChangeValCodeHandler(this);
     private boolean stopThread = false;
+    private LinearLayout finishValCode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,8 +83,10 @@ public class ChangePwdValCodeActivity extends AppCompatActivity implements View.
     private void initView() {
         nextStep = (TextView) findViewById(R.id.bt_next_step);
         sendChangeValCode = (TextView) findViewById(R.id.bt_send_change_val_code);
+        finishValCode = (LinearLayout) findViewById(R.id.finish_valCode);
         nextStep.setOnClickListener(this);
         sendChangeValCode.setOnClickListener(this);
+        finishValCode.setOnClickListener(this);
     }
 
     @Override
@@ -96,6 +100,9 @@ public class ChangePwdValCodeActivity extends AppCompatActivity implements View.
             case R.id.bt_send_change_val_code:
                 obtainChangeValCode(MyApplication.phone);
                 sendChangeValCodeClick();
+                break;
+            case R.id.finish_valCode:
+                finish();
                 break;
             default:
                 break;

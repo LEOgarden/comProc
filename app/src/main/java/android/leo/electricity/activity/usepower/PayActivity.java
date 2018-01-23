@@ -98,7 +98,8 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
             case R.id.pay_next:
-                Intent intent = new Intent();
+                Intent intent = new Intent(this, PaymentActivity.class);
+                startActivity(intent);
                 break;
         }
     }
