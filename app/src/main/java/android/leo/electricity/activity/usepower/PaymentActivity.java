@@ -117,7 +117,12 @@ public class PaymentActivity extends AppCompatActivity implements View.OnClickLi
         switch (v.getId()){
             case R.id.confirm_pay:
                 String str = edtMoney.getText().toString().trim();
-                long paySum = Long.parseLong(str) * 100l;
+                long paySum = 0l;
+                if (str.contains(".")) {
+                    paySum = (long) (Double.parseDouble(str) * 100);
+                }else {
+                    paySum = Long.parseLong(str)* 100l;
+                }
                 String payMpney = String.valueOf(paySum);
                 String urlString="https://api.mch.weixin.qq.com/pay/unifiedorder";
                 prePayIdAsyncTask=new PrePayIdAsyncTask();

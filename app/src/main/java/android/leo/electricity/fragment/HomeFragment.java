@@ -3,6 +3,7 @@ package android.leo.electricity.fragment;
 
 import android.app.Fragment;
 import android.content.Intent;
+import android.leo.electricity.FunctionUnableActivity;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.R;
 import android.leo.electricity.activity.LoginActivity;
@@ -55,6 +56,7 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
     private Button operation;//业务办理
     private Button arrearage;//欠费记录
     private RelativeLayout bind_num_r;//绑定用户
+    private Button fastPay;
 
     TimerTask mTimerTask = new TimerTask(){
         @Override
@@ -124,6 +126,8 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
         arrearage.setOnClickListener(this);
         bind_num_r = (RelativeLayout) view.findViewById(R.id.bind_num_r);
         bind_num_r.setOnClickListener(this);
+        fastPay = (Button) view.findViewById(R.id.fastPay);
+        fastPay.setOnClickListener(this);
         return view;
     }
 
@@ -241,7 +245,16 @@ public class HomeFragment extends Fragment implements ViewPager.OnPageChangeList
                     intent = new Intent(getActivity(), BindActivity.class);
                     startActivity(intent);
                 }
-
+                break;
+            case R.id.fastPay:
+                if (MyApplication.token == null){
+                    intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                }else {
+                    intent = new Intent(getActivity(), FunctionUnableActivity.class);
+                    intent.putExtra("title", "快速缴费");
+                    startActivity(intent);
+                }
                 break;
         }
     }

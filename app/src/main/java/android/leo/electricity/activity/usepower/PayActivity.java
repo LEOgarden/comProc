@@ -26,6 +26,7 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -98,8 +99,12 @@ public class PayActivity extends AppCompatActivity implements View.OnClickListen
                 }
                 break;
             case R.id.pay_next:
-                Intent intent = new Intent(this, PaymentActivity.class);
-                startActivity(intent);
+                if (inputNum.getText().toString().trim().length() != 0) {
+                    Intent intent = new Intent(this, PaymentActivity.class);
+                    startActivity(intent);
+                }else {
+                    Toast.makeText(this, "请输入正确的户号", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
     }

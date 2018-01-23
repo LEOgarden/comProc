@@ -2,6 +2,7 @@ package android.leo.electricity.activity.user;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.leo.electricity.FunctionUnableActivity;
 import android.leo.electricity.MyApplication;
 import android.leo.electricity.activity.RegisterActivity;
 import android.leo.electricity.utils.ConCla;
